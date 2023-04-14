@@ -16,7 +16,6 @@ export const ListenForCommands = () => {
 
         if (commandName === "pirate-say" && interaction.commandType === ApplicationCommandType.ChatInput) {
             const message = interaction.options.getString("message")
-            await interaction.deferReply()
 
             if (!message) {
                 interaction.reply({ content: "Avast Matey! Ye haven't sent anything", ephemeral: true });
@@ -37,20 +36,22 @@ export const ListenForCommands = () => {
                 return;
             }
 
+            await interaction.deferReply()
+
             const pirateSay = await PirateSay(message);
             if (!pirateSay) {
-                interaction.reply({ content: "Avast Matey! Something be amiss", ephemeral: true });
+                interaction.editReply({ content: "Avast Matey! Something be amiss" });
                 console.log(`User: ${interaction.user.username} tried to send a message but something went wrong: ${message}`);
                 return;
             }
 
             if (pirateSay.toLowerCase().startsWith("avast matey")) {
-                interaction.reply({ content: pirateSay, ephemeral: true });
+                interaction.editReply({ content: pirateSay });
                 console.log(`User: ${interaction.user.username} tried to send a message that was inappropriate: ${message}`);
                 return;
             }
 
-            interaction.reply(pirateSay);
+            interaction.editReply(pirateSay);
             console.log(`User: ${interaction.user.username} sent a message: ${message}\nResponse: ${pirateSay}`);
         }
     })
