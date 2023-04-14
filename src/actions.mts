@@ -16,6 +16,7 @@ export const ListenForCommands = () => {
 
         if (commandName === "pirate-say" && interaction.commandType === ApplicationCommandType.ChatInput) {
             const message = interaction.options.getString("message")
+            await interaction.deferReply()
 
             if (!message) {
                 interaction.reply({ content: "Avast Matey! Ye haven't sent anything", ephemeral: true });
