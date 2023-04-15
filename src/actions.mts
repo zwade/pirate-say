@@ -54,5 +54,9 @@ export const ListenForCommands = () => {
             interaction.editReply(pirateSay);
             console.log(`User: ${interaction.user.username} sent a message: ${message}\nResponse: ${pirateSay}`);
         }
+
+        if (commandName === "flag" && interaction.commandType === ApplicationCommandType.ChatInput) {
+            interaction.reply({ content: "<:plaidflag:1092982475514462228>", });
+        }
     })
 }

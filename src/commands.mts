@@ -13,6 +13,10 @@ const commands = [
                 .setDescription("The message to say")
                 .setRequired(true)
         ),
+
+    new SlashCommandBuilder()
+        .setName("flag")
+        .setDescription("Flag")
 ];
 
 export const EstablishSlashCommands = async () => {
